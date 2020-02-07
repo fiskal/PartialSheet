@@ -68,7 +68,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
         if let rect:CGRect = notification.userInfo![endFrame] as? CGRect {
             let height = rect.height
             let bottomInset = UIApplication.shared.windows.first?.safeAreaInsets.bottom
-            self.offset = height - (bottomInset ?? 0)
+            self.offset = height - (bottomInset ?? 0) - 44
         }
     }
     
