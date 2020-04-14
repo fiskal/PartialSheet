@@ -43,7 +43,9 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
     
     /// The point for the top anchor
     private var topAnchor: CGFloat {
-        return max(presenterContentRect.height - sheetContentRect.height - handlerSectionHeight, 110)
+        let screenHeight = UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.bounds.size.height ?? 0
+        let maxSpacing = screenHeight <= 568 ? 64 : 110
+        return max(presenterContentRect.height - sheetContentRect.height - handlerSectionHeight, maxSpacing)
     }
     
     /// The he point for the bottom anchor
