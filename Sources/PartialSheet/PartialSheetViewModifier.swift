@@ -66,6 +66,7 @@ struct PartialSheet<SheetContent>: ViewModifier where SheetContent: View {
     }
     
     private func keyboardShow(notification:Notification) {
+        if !self.presented { return }
         let endFrame = UIResponder.keyboardFrameEndUserInfoKey
         if let rect:CGRect = notification.userInfo![endFrame] as? CGRect {
             let height = rect.height
