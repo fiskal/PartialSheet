@@ -248,7 +248,7 @@ extension PartialSheet {
         let threshold = CGFloat(-50)
         let stiffness = CGFloat(0.3)
         if yOffset > threshold {
-            dragOffset = drag.translation.height
+            self.dragOffset = drag.translation.height
         } else if
             // if above threshold and belove ScreenHeight make it elastic
             -yOffset + self.sheetContentRect.height <
@@ -256,7 +256,7 @@ extension PartialSheet {
         {
             let distance = yOffset - threshold
             let translationHeight = threshold + (distance * stiffness)
-            dragOffset = translationHeight
+            self.dragOffset = translationHeight
         }
     }
     
@@ -269,14 +269,14 @@ extension PartialSheet {
         if verticalDirection > 1 {
             DispatchQueue.main.async {
                 withAnimation(.interpolatingSpring(stiffness: 300.0, damping: 30.0, initialVelocity: 10.0)) {
-                    dragOffset = 0
+                    self.dragOffset = 0
                     self.manager.isPresented = false
                     self.manager.onDismiss?()
                 }
             }
         } else if verticalDirection < 0 {
             withAnimation {
-                dragOffset = 0
+                self.dragOffset = 0
                 self.manager.isPresented = true
             }
         } else {
@@ -293,7 +293,7 @@ extension PartialSheet {
             }
             
             withAnimation {
-                dragOffset = 0
+                self.dragOffset = 0
                 self.manager.isPresented = (closestPosition == topAnchor)
                 if !manager.isPresented {
                     manager.onDismiss?()
